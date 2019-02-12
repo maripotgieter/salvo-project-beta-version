@@ -108,39 +108,39 @@ public class SalvoApplication {
 				List<String>location7 = Arrays.asList("A2", "A3", "A4");
 				List<String>location8 = Arrays.asList("G6", "H6");
 
-				Ship ship1 = new Ship("Destroyer", gamePlayer1, location1);
-				Ship ship2 = new Ship("Submarine", gamePlayer1, location2);
-				Ship ship3 = new Ship("Patrol Boat", gamePlayer1, location3);
-				Ship ship4 = new Ship("Destroyer", gamePlayer2, location4);
-				Ship ship5 = new Ship("Patrol Boat", gamePlayer2, location5);
+				Ship ship1 = new Ship("Raccoon", gamePlayer1, location1);
+				Ship ship2 = new Ship("Fox", gamePlayer1, location2);
+				Ship ship3 = new Ship("Hedgehog", gamePlayer1, location3);
+				Ship ship4 = new Ship("Raccoon", gamePlayer2, location4);
+				Ship ship5 = new Ship("Hedgehog", gamePlayer2, location5);
 
-				Ship ship6 = new Ship("Destroyer", gamePlayer3, location4);
-				Ship ship7 = new Ship("Patrol Boat", gamePlayer3, location6);
-				Ship ship8 = new Ship("Submarine", gamePlayer4, location7);
-				Ship ship9 = new Ship("Patrol Boat", gamePlayer4, location8);
+				Ship ship6 = new Ship("Fox", gamePlayer3, location4);
+				Ship ship7 = new Ship("Hedgehog", gamePlayer3, location6);
+				Ship ship8 = new Ship("Raccoon", gamePlayer4, location7);
+				Ship ship9 = new Ship("Hedgehog", gamePlayer4, location8);
 
-				Ship ship10 = new Ship("Destroyer", gamePlayer5, location3);
-				Ship ship11 = new Ship("Patrol Boat", gamePlayer5, location6);
-				Ship ship12 = new Ship("Submarine", gamePlayer6, location7);
-				Ship ship13 = new Ship("Patrol Boat", gamePlayer6, location8);
+				Ship ship10 = new Ship("Hedgehog", gamePlayer5, location3);
+				Ship ship11 = new Ship("Raccoon", gamePlayer5, location7);
+				Ship ship12 = new Ship("Fox", gamePlayer6, location7);
+				Ship ship13 = new Ship("Hedgehog", gamePlayer6, location8);
 
-				Ship ship14 = new Ship("Destroyer", gamePlayer7, location4);
-				Ship ship15 = new Ship("Patrol Boat", gamePlayer7, location6);
-				Ship ship16 = new Ship("Submarine", gamePlayer8, location7);
-				Ship ship17 = new Ship("Patrol Boat", gamePlayer8, location8);
+				Ship ship14 = new Ship("Raccoon", gamePlayer7, location4);
+				Ship ship15 = new Ship("Hedgehog", gamePlayer7, location6);
+				Ship ship16 = new Ship("Fox", gamePlayer8, location7);
+				Ship ship17 = new Ship("Hedgehog", gamePlayer8, location8);
 
-				Ship ship18 = new Ship("Destroyer", gamePlayer9, location4);
-				Ship ship19 = new Ship("Patrol Boat", gamePlayer9, location6);
-				Ship ship20 = new Ship("Submarine", gamePlayer10, location7);
-				Ship ship21 = new Ship("Patrol Boat", gamePlayer10, location8);
+				Ship ship18 = new Ship("Raccoon", gamePlayer9, location4);
+				Ship ship19 = new Ship("Hedgehog", gamePlayer9, location6);
+				Ship ship20 = new Ship("Fox", gamePlayer10, location7);
+				Ship ship21 = new Ship("Hedgehog", gamePlayer10, location8);
 
-				Ship ship22 = new Ship("Destroyer", gamePlayer11, location4);
-				Ship ship23 = new Ship("Patrol Boat", gamePlayer11, location6);
+				Ship ship22 = new Ship("Raccoon", gamePlayer11, location4);
+				Ship ship23 = new Ship("Hedgehog", gamePlayer11, location6);
 
-				Ship ship24 = new Ship("Destroyer", gamePlayer13, location4);
-				Ship ship25 = new Ship("Patrol Boat", gamePlayer13, location6);
-				Ship ship26 = new Ship("Submarine", gamePlayer14, location7);
-				Ship ship27 = new Ship("Patrol Boat", gamePlayer14, location8);
+				Ship ship24 = new Ship("Raccoon", gamePlayer13, location4);
+				Ship ship25 = new Ship("Hedgehog", gamePlayer13, location6);
+				Ship ship26 = new Ship("Fox", gamePlayer14, location7);
+				Ship ship27 = new Ship("Hedgehog", gamePlayer14, location8);
 
 				shipRepository.save(ship1);
 				shipRepository.save(ship2);

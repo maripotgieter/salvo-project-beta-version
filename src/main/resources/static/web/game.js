@@ -16,7 +16,7 @@ var app = new Vue({
         shipsHaveBeenPlaced: false,
         indexOfShip: 0,
         salvoes: [],
-        salvoesToPost:{},
+        salvoesToPost: {},
         ships: [
             {
                 name: "Panda",
@@ -82,16 +82,21 @@ var app = new Vue({
                         return response.json()
                             .then(json => {
                                 app.gameData = json;
+                                app.displayingThePlayers();
                                 app.printingTheShips();
-                            app.salvoes = [];
-                                if (app.gameData.gameView.ships.length > 0) {
+                                app.salvoes = [];
+                                if (app.gameData.gameView.ships.length != 0) {
                                     app.shipsHaveBeenPlaced = true;
+                                    Vue.nextTick()
+                                        .then(function () {
+                                            app.printingTheSalvoesAndHits("user_salvoes", "E");
+                                            if (app.gameData.gameView.enemy_salvoes) {
+                                                app.printingTheSalvoesAndHits("enemy_salvoes", "U");
+                                            }
+                                        })
                                 } else {
                                     app.shipsHaveBeenPlaced = false;
                                 }
-                                app.displayingThePlayers();
-                                //                                app.printingTheSalvoesAndHits("user_salvoes", "E");
-                                //                                app.printingTheSalvoesAndHits("enemy_salvoes", "U");
                             })
                     } else {
                         app.helpfulMessage = "You are not authorised to see this game!"
@@ -134,11 +139,9 @@ var app = new Vue({
         printingTheSalvoesAndHits: function (salvoArray, tableId) {
             for (var i = 0; i < app.gameData.gameView[salvoArray].length; i++) {
                 for (var j = 0; j < app.gameData.gameView[salvoArray][i].locations.length; j++) {
-                    //                    console.log(app.gameData)
                     var cell = document.getElementById(tableId + app.gameData.gameView[salvoArray][i].locations[j]);
-                    //                   console.log(cell)
-                    if (cell.classList.contains("ship-location")) {
-                        cell.removeAttribute("class", "ship-location");
+                    if (cell.classList.contains("panda") || cell.classList.contains("llama") || cell.classList.contains("fox") || cell.classList.contains("raccoon") || cell.classList.contains("hedgehog")) {
+                        cell.removeAttribute("class");
                         cell.setAttribute("class", "hits-location")
                     } else {
                         cell.setAttribute("class", "salvo-location");
@@ -351,11 +354,11 @@ var app = new Vue({
                     body: JSON.stringify(salvoInfo)
 
                 }).then(response => {
-//                    console.log(response)
+                    //                    console.log(response)
 
                     response.json()
                         .then(json => {
-                       app.getData(id)
+                            app.getData(id)
                         })
                 })
 
@@ -367,15 +370,15 @@ var app = new Vue({
             var cellId = id;
             var dataCell = document.getElementById("E" + id);
 
-            if (dataCell.classList.contains("salvo-location")) {
+            if (dataCell.classList.contains("temporary-salvo-location")) {
                 var index = app.salvoes.indexOf(cellId);
                 if (index > -1) {
                     app.salvoes.splice(index, 1)
                     var toBeRemoved = document.getElementById("E" + id);
-                    toBeRemoved.classList.remove("salvo-location");
+                    toBeRemoved.classList.remove("temporary-salvo-location");
                 }
             } else {
-                dataCell.classList.add("salvo-location")
+                dataCell.classList.add("temporary-salvo-location")
                 app.salvoes.push(cellId)
             }
             app.salvoRules(app.salvoes);
@@ -388,7 +391,7 @@ var app = new Vue({
             if (salvoes.length > 5) {
                 var lastElement = salvoes.pop();
                 var toBeRemoved = document.getElementById("E" + lastElement);
-                toBeRemoved.classList.remove("salvo-location");
+                toBeRemoved.classList.remove("temporary-salvo-location");
             }
         },
     }

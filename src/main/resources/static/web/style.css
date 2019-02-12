@@ -285,11 +285,15 @@ body {
 }
 
 .hits-location {
-    background: red;
+    background: red !important;
 }
 
 .salvo-location {
-    background: yellow;
+    background: url(images/grassOne.png) !important;
+}
+
+.temporary-salvo-location {
+    background: url(images/sunflower.png) !important;
 }
 
 .table_salvoes {
@@ -470,6 +474,3 @@ body {
     font-family: 'Major Mono Display', monospace;    
 }
 
-.salvo-location {
-    background: red !important;
-}
