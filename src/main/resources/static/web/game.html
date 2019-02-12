@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display|Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title> Game View </title>
+</head>
+
+<body>
+
+    <div id="main" class="main_flex">
+
+
+   <div class="top_section">
+            <div class="main_form_section">
+                <div class="heading_secondary">
+                    <div id=game-title>Name of The Game</div>
+                </div>
+                <div>
+                    <div class="greeting">{{gamePlayerUser}} (YOU) V {{gamePlayerEnemy}}</div>
+                    <div>{{ helpfulMessage }}</div>
+                </div>
+                <div class="buttons_flex">
+                    <input type="button" value="Home" v-on:click="goHome()">
+                    <input v-on:click="logout()" type="button" value="Logout">
+                </div>
+            </div>
+            
+               
+             <div v-if=" arrayOfShips.length == 5 && shipsHaveBeenPlaced == false" id="letUsGo"><button v-on:click = "postShips(id)"><img src="images/shrimp.png" alt="shrimp_noodle"><div>Go!</div></button></div>
+             
+              <div v-if="shipsHaveBeenPlaced == true && salvoes.length == 5"><button @click="postSalvoes(salvoesToPost, id)">Fire</button></div>
+        </div>
+     
+
+        <div class="table_flex">
+
+            <table class="table_ships" id="ships_table" v-on:click = "placingTheShip()">
+                <tr v-for="r in rows">
+                    <td v-for="c in columns" v-bind:id="'U'+r+c" @mouseover="currentShipObject.counter <= 0 ?   hoveringEffectBeforePlacement('U'+r+c) : {} "></td>
+                </tr>
+            </table>
+
+
+            
+            <table class="table_salvoes" v-if="shipsHaveBeenPlaced == true">
+                <tr v-for="r in rows">
+                    <td v-for="c in columns" v-bind:id="'E'+r+c" @click="getSalvoId(r+c)"></td>
+                </tr>
+            </table>
+            
+           
+
+            <div id="placeShips" v-if="shipsHaveBeenPlaced == false">
+            <div v-for="(ship, index) in ships" :id="ship.name" v-on:click="currentShipInfo(index)" >{{ ship.name }}<img :src="ship.image" :alt="ship.name">{{ ship.counter }}</div>    
+            <div>Change Direction<button v-if="state == 'horizontal'" v-on:click = "changingTheState('vertical')">VERTICAL</button><button v-if="state == 'vertical'" v-on:click = "changingTheState('horizontal')">HORIZONTAL</button></div>
+           
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="game.js"></script>
+</body>
+
+</html>

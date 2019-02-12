@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display|Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title> Games View </title>
+</head>
+
+<body>
+    <div id="main">
+
+
+        <div class="heading_main" v-if="loggedIn == false">
+            <div id=game-title>Name of The Game</div><img src="images/panda-bear.png" alt="panda-bear"></div>
+
+        <div class="form_section" v-if="loggedIn == false">
+
+            <div class="inputs"><input type="text" v-model="userName" name="userName" placeholder="EMAIL" autocomplete="off" required></div>
+            <div class="inputs">
+                <input type="password" v-model="password" name="password" placeholder="PASSWORD" required>
+            </div>
+            <div class="buttons_flex"><input v-on:click="login()" type="button" value="Login"><input v-on:click="validateEmail(userName)" type="button" value="Sign up"></div>
+
+            <div>{{ helpfulMessage }}</div>
+        </div>
+
+       <div class="main-page">
+       
+        <div class="top_section">
+            <div class="main_form_section" v-if="loggedIn == true">
+                <div class="heading_secondary">
+                    <div id=game-title>Name of The Game</div>
+                </div>
+                <div>
+                    <div class="greeting">WELCOME {{ currentUser }} !</div>
+                    <div>{{ helpfulMessage }}</div>
+                </div>
+                <div class="buttons_flex">
+                    <input v-on:click="logout()" type="button" value="Logout">
+                    <input type="button" value="Create game" v-on:click="createGame()">
+                </div>
+            </div>
+        </div>
+
+
+        
+<!--        <h1>Leaderboard!</h1>-->
+      
+        <table id="game-status" v-if="loggedIn == true">
+            <thead>
+                <tr>
+                    <th colspan=4>GAMES</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="game in gameInfo">
+                    <td>{{ game.game }}</td>
+                    <td>{{ game.emailOne}}</td>
+                    <td>{{ game.emailTwo }}</td>
+                    <td>
+                        <div v-if="loggedIn == true">
+                            <button class="return_button" v-if="currentUser == game.emailOne" v-on:click="returnToGame(game.gpIdOne)">RETURN</button>
+                            <button class="return_button" v-if="currentUser == game.emailTwo" v-on:click="returnToGame(game.gpIdTwo)">RETURN</button>
+                            <button class = "join_button" v-if="currentUser != null && currentUser != game.emailOne && game.emailTwo == null" @click="joinGame(game.game)">JOIN</button>
+                            <div v-if="currentUser != game.emailOne && currentUser != game.emailTwo && game.emailOne != null && game.emailTwo != null">BUSY</div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+
+<!--
+        <table id="leaderboard">
+            <thead>
+                <tr>
+                    <th>Player</th>
+                    <th>Total</th>
+                    <th>Wins</th>
+                    <th>Losses</th>
+                    <th>Ties</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr v-for="player in scoreboard" v-if="player.total != 0 || player.wins != 0 || player.losses != 0 || player.ties != 0">
+                    <td>{{ player.player }}</td>
+                    <td>{{ player.total }}</td>
+                    <td>{{ player.wins }}</td>
+                    <td>{{ player.losses }}</td>
+                    <td>{{ player.ties }}</td>
+                </tr>
+            </tbody>
+        </table>
+-->
+
+
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="games.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,475 @@
+/*/////////////////////////*/
+
+body {
+    background-color: rgba(255, 246, 238);
+    z-index: -2;
+    height: 97vh;
+    width: 99%;
+}
+
+#main {
+    height: 100%;
+}
+
+/*/////////////////////////GAMES///////////////////////////*/
+
+.heading_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+}
+
+.heading_main > img {
+    width: 10%;
+    transition: transform .2s;
+}
+
+.heading_main > img:hover {
+    transform: scale(1.5);
+}
+
+.form_section {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+
+
+}
+
+.form_section > .inputs {
+    width: 30%;
+}
+
+.form_section > .inputs > input {
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 100%;
+
+}
+
+.form_section > .inputs > input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 500px white inset;
+}
+
+.form_section > .inputs > input::placeholder {
+    color: lightgray;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+.form_section > .inputs > input[type=text] {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+.form_section > .inputs > input[type=password] {
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+}
+
+#game-title {
+    font-family: 'Major Mono Display', monospace;
+    color: rgba(151, 185, 138);
+    font-size: 100px;
+    text-align: center;
+}
+
+
+.form_section > .buttons_flex {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form_section > .buttons_flex > input {
+    width: 50%;
+    padding: 15px;
+    border: none;
+    color: rgba(255, 246, 238);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+
+}
+
+.buttons_flex > input:first-child {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: rgba(219, 131, 96);
+}
+
+.buttons_flex > input:last-child {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgba(178, 72, 61);
+    /*
+    -webkit-animation: bounce .3s infinite alternate;
+  -moz-animation: bounce .3s infinite alternate;
+  animation: bounce .3s infinite alternate;
+*/
+}
+
+@-webkit-keyframes bounce {
+    to {
+        -webkit-transform: scale(1.2);
+    }
+}
+
+@-moz-keyframes bounce {
+    to {
+        -moz-transform: scale(1.2);
+    }
+}
+
+@keyframes bounce {
+    to {
+        transform: scale(1.2);
+    }
+}
+
+
+.heading_secondary > #game-title {
+    font-family: 'Major Mono Display', monospace;
+    color: rgba(151, 185, 138);
+    font-size: 50px;
+    text-align: center;
+
+}
+
+.greeting {
+    font-size: 20px;
+    color: rgba(219, 131, 96);
+    font-family: 'Nunito', sans-serif;
+    text-align: center;
+}
+
+.main-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+}
+
+.main-page > .top_section {
+    width: 100%;
+    height: 40%;
+}
+
+.main-page > .top_section > .main_form_section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    ;
+    align-items: center;
+
+}
+
+.main-page > #game-status {
+    width: 60%;
+    height: 50%;
+    font-family: 'Nunito', sans-serif;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.2);
+
+}
+
+.main-page > #game-status > thead > tr > th {
+    border-bottom: 5px solid white;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.main-page > #game-status > tbody > tr {
+    border-bottom: 5px solid white;
+    text-align: center;
+
+}
+
+.return_button {
+    background: rgba(151, 185, 138);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    font-size: 15px;
+    width: 100%;
+}
+
+.join_button {
+    background: rgba(219, 131, 96);
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    color: white;
+    font-size: 15px;
+    width: 100%;
+}
+
+
+
+.main_form_section > .buttons_flex {
+    width: 30%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.main_form_section > .buttons_flex > input {
+    width: 50%;
+    padding: 15px;
+    border: none;
+    color: rgba(255, 246, 238);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+
+}
+
+/*////////////////////////GAME/////////////////*/
+
+.main_flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.main_flex > .top_section {
+    position: relative;
+}
+
+.main_flex > .top_section > .main_form_section {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    ;
+    align-items: center;
+}
+
+
+.table_ships {
+    font-size: 20px;
+    display: flex;
+    width: 50%;
+}
+
+.table_ships > tbody {
+    margin: auto;
+}
+
+.table_ships td {
+    width: 40px;
+    height: 40px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    color: lightgray;
+    position: relative;
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=0);
+}
+
+.ship-location {
+    background: linear-gradient(to right, #051937, #0c2247, #152c58, #1f366a, #29407c) !important;
+}
+
+.hits-location {
+    background: red;
+}
+
+.salvo-location {
+    background: yellow;
+}
+
+.table_salvoes {
+    font-size: 20px;
+    display: flex;
+    width: 50%;
+}
+
+.table_salvoes > tbody {
+    margin: auto;
+}
+
+.table_salvoes td {
+    width: 40px;
+    height: 40px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    color: lightgray;
+    position: relative;
+    background: #eeeeee;
+    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+    background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=0);
+}
+
+.table_flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+.hover_class {
+    -webkit-box-shadow:inset 0px 0px 0px 3px rgba(169,169,169) !important;
+    -moz-box-shadow:inset 0px 0px 0px 3px rgba(169,169,169) !important;
+    box-shadow:inset 0px 0px 0px 3px rgba(169,169,169)!important;
+}
+
+.ship_placement {
+    background: blue !important;
+}
+
+#placeShips {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 40%;
+}
+
+
+#placeShips > div {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(151, 185, 138);
+    border: 1px solid rgba(151, 185, 138);
+    border-radius: 5px;
+    margin: 5px;
+    color: rgba(255, 246, 238);
+    font-family: 'Major Mono Display', monospace;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#placeShips > div > img {
+    width: 30%;
+}
+
+#placeShips > div:nth-child(6) {
+    border: none;
+    background-color: transparent;
+    color: black;
+    font-family: 'Nunito', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#placeShips > div:nth-child(6) > button {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 20px;
+    background: transparent;
+    color: black;
+}
+
+#placeShips > div:nth-child(7) > button {
+/*    button style with sea urchin*/
+}
+
+.panda {
+    background: url(images/little_panda.png) !important;
+    background-size: cover;
+}
+
+.llama {
+    background: url(images/little_llama.png) !important;
+    background-size: cover;
+}
+
+.fox {
+    background: url(images/little_fox.png) !important;
+    background-size: cover;
+}
+
+.hedgehog {
+    background: url(images/little_hedgehog.png)!important;
+    background-size: cover;
+}
+
+.raccoon {
+    background: url(images/little_raccoon.png) !important;
+    background-size: cover;
+}
+
+
+@keyframes blink {  
+  0% { background-color: rgba(178,72,61); }
+  100% { background-color: rgba(151, 185, 138); }
+}
+@-webkit-keyframes blink {
+  0% { background-color: rgba(178,72,61); }
+  100% { background-color: rgba(151, 185, 138); }
+}
+
+.blink {
+  -webkit-animation: blink 1s linear infinite;
+  -moz-animation: blink 1s linear infinite;
+  animation: blink 1s linear infinite;
+}
+
+#letUsGo {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 10%;
+    bottom: 15%;
+}
+
+#letUsGo > button {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: white;
+    border: white;
+     -webkit-box-shadow: 2px 2px 5px 0px rgba(169,169,169, 1);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(169,169,169, 1);
+    box-shadow: 2px 2px 5px 0px rgba(169,169,169, 1);
+    
+}
+
+
+#letUsGo > button:active {
+  box-shadow: 0 3px 0 #00823F;
+  top: 3px;
+}
+
+#letUsGo > button > img{
+    width: 90%;
+    background-size: contain;
+    z-index: -1;
+    opacity: 0.5;
+
+}
+
+#letUsGo > button > div {
+    position: absolute;
+    bottom: 25%;
+    left: 25%;
+    font-size: 50px;
+    font-weight: bold;
+    font-family: 'Major Mono Display', monospace;    
+}
+
+.salvo-location {
+    background: red !important;
+}
