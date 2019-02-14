@@ -288,6 +288,23 @@ body {
     background: red !important;
 }
 
+.hits-panda {
+    background: url(images/little_panda_black.png) !important;
+}
+.hits-fox {
+    background: url(images/little_fox_black.png) !important;
+}
+.hits-llama {
+    background: url(images/little_llama_black.png) !important;
+}
+.hits-raccoon {
+    background: url(images/little_raccoon_black.png) !important;
+
+}
+.hits-hedgehog {
+    background: url(images/little_hedgehog_black.png) !important;
+}
+
 .salvo-location {
     background: url(images/grassOne.png) !important;
 }

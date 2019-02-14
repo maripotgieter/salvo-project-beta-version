@@ -82,6 +82,7 @@ var app = new Vue({
                         return response.json()
                             .then(json => {
                                 app.gameData = json;
+                                console.log(app.gameData)
                                 app.displayingThePlayers();
                                 app.printingTheShips();
                                 app.salvoes = [];
@@ -92,6 +93,7 @@ var app = new Vue({
                                             app.printingTheSalvoesAndHits("user_salvoes", "E");
                                             if (app.gameData.gameView.enemy_salvoes) {
                                                 app.printingTheSalvoesAndHits("enemy_salvoes", "U");
+                                                app.printHits(app.gameData.gameView.hits, "E");
                                             }
                                         })
                                 } else {
@@ -137,18 +139,35 @@ var app = new Vue({
             }
         },
         printingTheSalvoesAndHits: function (salvoArray, tableId) {
+            console.log("This function is working well!")
             for (var i = 0; i < app.gameData.gameView[salvoArray].length; i++) {
                 for (var j = 0; j < app.gameData.gameView[salvoArray][i].locations.length; j++) {
                     var cell = document.getElementById(tableId + app.gameData.gameView[salvoArray][i].locations[j]);
-                    if (cell.classList.contains("panda") || cell.classList.contains("llama") || cell.classList.contains("fox") || cell.classList.contains("raccoon") || cell.classList.contains("hedgehog")) {
+                    console.log(cell.classList.contains("panda"))
+                    if (cell.classList.contains("panda")) {
+                        console.log("hi")
                         cell.removeAttribute("class");
-                        cell.setAttribute("class", "hits-location")
-                    } else {
-                        cell.setAttribute("class", "salvo-location");
+                        cell.setAttribute("class", "hits-panda")
                     }
+                    if (cell.classList.contains("fox")) {
+                        cell.removeAttribute("class");
+                        cell.setAttribute("class", "hits-fox")
+                    }
+                    if (cell.classList.contains("hedgehog")) {
+                        cell.setAttribute("class", "hits-hedgehog")
+                    }
+                    if (cell.classList.contains("llama")) {
+                        cell.setAttribute("class", "hits-llama")
+                    }
+                    if (cell.classList.contains("raccoon")) {
+                        cell.setAttribute("class", "hits-raccoon")
+                    }
+//                    } else {
+//                        console.log("also this one")
+//                        cell.setAttribute("class", "salvo-location");
+//                    }
                 }
             }
-
         },
         logout: function () {
             var fetchConfig =
@@ -392,6 +411,30 @@ var app = new Vue({
                 var lastElement = salvoes.pop();
                 var toBeRemoved = document.getElementById("E" + lastElement);
                 toBeRemoved.classList.remove("temporary-salvo-location");
+            }
+        },
+        printHits: function (hitsArray, tbl) {
+            for (var key in hitsArray) {
+                for (var i = 0; i < hitsArray[key].length; i++) {
+                    var cell = document.getElementById(tbl + hitsArray[key][i]);
+                    if (key == "Fox") {
+                        
+                        cell.setAttribute("class", "hits-fox")
+                    }
+                    if (key == "Hedgehog") {
+                       
+                        cell.setAttribute("class", "hits-hedgehog")
+                    }
+                    if (key == "Raccoon") {
+                        cell.setAttribute("class", "hits-raccoon")
+                    }
+                    if (key == "Panda") {
+                        cell.setAttribute("class", "hits-panda")
+                    }
+                    if (key == "Llama") {
+                        cell.setAttribute("class", "hits-llama")
+                    }
+                }
             }
         },
     }

@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.*;
+
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -21,7 +23,8 @@ public class SalvoController {
     @Autowired
     private PlayerRepository playerRepository;
 
-    @Autowired ShipRepository shipRepository;
+    @Autowired
+    ShipRepository shipRepository;
 
     @RequestMapping(path = "/games", method = RequestMethod.GET)
     public Map<String, Object> getAllGames(Authentication authentication) {
@@ -79,6 +82,7 @@ public class SalvoController {
                 gameViewMap.put("user_salvoes", salvoArray(gamePlayer));
                 if (gamePlayer.getGame().getGamePlayers().size() > 1) {
                     gameViewMap.put("enemy_salvoes", salvoArray(getOpponent(gamePlayer)));
+                    gameViewMap.put("hits", getHitsAndTypeOfShip(gamePlayer));
                 }
                 return new ResponseEntity<>(makeMap("gameView", gameViewMap), HttpStatus.CREATED);
             } else {
@@ -155,6 +159,7 @@ public class SalvoController {
             }
         }
     }
+
     private Map<String, Object> makeMap(String key, Object value) {
         Map<String, Object> map = new HashMap<>();
         map.put(key, value);
@@ -196,29 +201,34 @@ public class SalvoController {
         }
     }
 
-    @RequestMapping(value="/games/players/{id}/ships", method=RequestMethod.POST)
-    public ResponseEntity<Map<String, Object>> createShips (@PathVariable Long id,
-                                                            Authentication authentication,
-                                                            @RequestBody Set<Ship> ships) {
+    @RequestMapping(value = "/games/players/{id}/ships", method = RequestMethod.POST)
+    public ResponseEntity<Map<String, Object>> createShips(@PathVariable Long id,
+                                                           Authentication authentication,
+                                                           @RequestBody Set<Ship> ships) {
         if (authentication != null) {
-        Player currentUser = playerRepository.findByUserName(authentication.getName());
-        if (currentUser != null) {
-            GamePlayer gamePlayer = gamePlayerRepository.getOne(id);
-            if (gamePlayer != null) {
-                if (gamePlayer.getPlayer().getUserName() == currentUser.getUserName()) {
-                    if (gamePlayer.getShips().size() == 0) {
-                        for (Ship ship : ships) {
-                            ship.setGamePlayer(gamePlayer);
-                            shipRepository.save(ship);
+            Player currentUser = playerRepository.findByUserName(authentication.getName());
+            if (currentUser != null) {
+                GamePlayer gamePlayer = gamePlayerRepository.getOne(id);
+                if (gamePlayer != null) {
+                    if (gamePlayer.getPlayer().getUserName() == currentUser.getUserName()) {
+                        if (gamePlayer.getShips().size() == 0) {
+                            for (Ship ship : ships) {
+                                ship.setGamePlayer(gamePlayer);
+                                shipRepository.save(ship);
+                            }
+                            return new ResponseEntity<>(makeMap("success", "Ships created"), HttpStatus.CREATED);
+                        } else {
+                            return new ResponseEntity<>(makeMap("error", "Already placed ships"), HttpStatus.FORBIDDEN);
                         }
-                        return new ResponseEntity<>(makeMap("success", "Ships created"), HttpStatus.CREATED);
-                    } else {return new ResponseEntity<>(makeMap("error", "Already placed ships"), HttpStatus.FORBIDDEN);}
-                } else {return new ResponseEntity<>(makeMap("error", ""), HttpStatus.UNAUTHORIZED);}
-            } else { return new ResponseEntity<>(makeMap("error", ""), HttpStatus.UNAUTHORIZED);
+                    } else {
+                        return new ResponseEntity<>(makeMap("error", ""), HttpStatus.UNAUTHORIZED);
+                    }
+                } else {
+                    return new ResponseEntity<>(makeMap("error", ""), HttpStatus.UNAUTHORIZED);
+                }
+            } else {
+                return new ResponseEntity<>(makeMap("error", "Login"), HttpStatus.UNAUTHORIZED);
             }
-        } else {
-            return new ResponseEntity<>(makeMap("error", "Login"), HttpStatus.UNAUTHORIZED);
-        }
         } else {
             return new ResponseEntity<>(makeMap("error", "Login"), HttpStatus.UNAUTHORIZED);
         }
@@ -267,4 +277,61 @@ public class SalvoController {
         }
         return lastTurn + 1;
     }
+
+    private List<String> getShipLocations(GamePlayer gamePlayer) {
+        List<String> shipLocations = new ArrayList<>();
+        Set<Ship> ships = gamePlayer.getShips();
+        for (Ship ship : ships) {
+            List<String> eachLocation = ship.getShipLocations();
+            for (String location : eachLocation) {
+                shipLocations.add(location);
+            }
+        }
+        return shipLocations;
+    }
+
+    private List<String> getSalvoLocations(GamePlayer gamePlayer) {
+        List<String> salvoLocations = new ArrayList<>();
+        Set<Salvo> salvos = gamePlayer.getSalvoes();
+        for (Salvo salvo : salvos) {
+            List<String> eachLocation = salvo.getSalvoLocations();
+            for (String location : eachLocation) {
+                salvoLocations.add(location);
+            }
+        }
+        return salvoLocations;
+    }
+
+    private List<String> getHits(GamePlayer gamePlayer) {
+        List<String> getHits = new ArrayList<>();
+        List<String> shipLocations = getShipLocations(getOpponent(gamePlayer));
+        List<String> salvoLocations = getSalvoLocations(gamePlayer);
+        for (String salvoLocation : salvoLocations) {
+            for (String shipLocation : shipLocations) {
+                if (salvoLocation == shipLocation) {
+                    getHits.add(salvoLocation);
+                }
+            }
+        }
+        return getHits;
+    }
+
+    private Map<String, List<String>> getHitsAndTypeOfShip(GamePlayer gamePlayer) {
+        Map<String, List<String>> map = new LinkedHashMap<>();
+        Set<Ship> ships = getOpponent(gamePlayer).getShips();
+        for (Ship ship : ships) {
+            List<String> eachLocation = ship.getShipLocations();
+            String shipType = ship.getType();
+            List<String> list = new ArrayList<>();
+            for (String loc : eachLocation) {
+                if (getHits(gamePlayer).contains(loc))
+                    list.add(loc);
+            }
+            map.put(shipType, list);
+        }
+        return map;
+    }
+
+
+
 }
